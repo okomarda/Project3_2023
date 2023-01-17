@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Список постов по имени пользователя</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/styles_1.css">
+</head>
+
+<body>
+<style>
+p
+{
+    width:500px;
+    word-wrap:break-word;
+    font-size: 130%;
+    color: black
+}
+
+body
+{
+    background-color: bisque;
+}
+</style>
+
+<main>
+    <h3><a href="/" class="link">Назад</a></h3> <br>
+
+{% for post in posts %}
+<a href="/users/{{post['poster_name']}}"> <h2>{{post['poster_name']}}</h2></a>
+<img src="{{post['poster_avatar']}}" width="10%" alt=""> <br>
+<img src="{{post['pic']}}" width="30%" alt="">
+<p><strong>Содержание</strong></p>
+<p>{{post['content']}}</p>
+<p><strong>&#128065</strong> {{post['views_count']}}</p>
+<p><strong>&#128512</strong> {{post['likes_count']}}</p>
+<p><strong>Пост №:</strong>{{post['pk']}}</p> <br />
+<a href="/post/{{post['pk']}}"> <p>подробнее</p></a>  <hr>
+
+{% endfor %}
+</main>
+</body>
+
+</html>

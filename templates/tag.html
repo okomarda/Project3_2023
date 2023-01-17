@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKYPROGRAM tag</title>
+  <link href="/static/css/styles.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <header class="container header">
+    <div class="header__wrapper">
+      <a href="/" class="link">&#11013</a>
+      <a href="#" class="header__nosvg">
+        ВЫБОРКА ПОСТОВ ПО ТЭГУ
+      </a>
+    </div>
+  </header>
+  <main class="container">
+    <section class="items">
+      {% for post in posts %}
+      <div class="items__item item">
+        <div class="item__top">
+          <a href="/users/{{post['poster_name']}}" class="item__head"> <h2>{{post['poster_name']}}</h2></a>
+            <div class="item__ava-wrap">
+              <img src="{{post['poster_avatar']}}" alt="" class="item__ava" width="47">
+            </div>
+          </a>
+        </div>
+          <img src="{{post['pic']}}" alt="" width="348" class="item__post-img">
+          <p class="item__descr"><a href="{{heshteg}}" class="item__tag">#{{heshteg}}</a> {{post['content']|safe}}</p>
+        <div class="item__post-info">
+          <div class="item__counter">
+            <img src="img/eye.png" alt="" class="item__counter-icon" width="26">
+           <p><strong>&#128065</strong> {{post['views_count']}}</p>
+           <p><strong>&#128512</strong> {{post['likes_count']}}</p>
+          </div>
+        </div>
+        <div class="item__post-bottom">
+          <a href="/post/{{post['pk']}}" class="item__btn-more">Подробнее</a>
+          <button type="button" class="item__bookmark-btn">
+            <img src="img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>

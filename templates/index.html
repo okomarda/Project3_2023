@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKYPROGRAM search</title>
+   <link rel="stylesheet" href="/static/css/styles.min.css">
+</head>
+
+<body>
+  <header class="container header">
+    <div class="header__wrapper">
+      <a href="/" class="header__logo-link">
+        <svg class="header__logo" width="177" height="26">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#skyprogram"></use>
+        </svg>
+      </a>
+      <a href="/bookmarks.html" class="header__bookmark-btn">
+        <img src="static/img/bookmark.png" alt="" class="header__bookmark-icon" width="28">
+        <span class="header__bookmark-counter">{{len_posts}}</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="search">
+      <form action="/search_form/search_results" method="get">
+       <input type="text" name="s">
+        <input type="submit" value="Найти" class="button">
+      </form>
+    </div>
+
+    <section class="items">
+      {% for post in posts %}
+      <div class="items__item item">
+        <div class="item__top">
+          <a href="/users/{{post['poster_name']}}" class="item__head">
+            <div class="item__ava-wrap">
+              <img src="{{post['poster_avatar']}}" alt="" class="item__ava" width="47">
+            </div>
+            <span class="item__username">{{post['poster_name']}}</span>
+          </a>
+        </div>
+        <a href="/post.html" class="item__post-link">
+          <img src="{{post['pic']}}" alt="" width="348" class="item__post-img">
+        </a>
+        <p class="item__descr">{{post['content']|truncate(50)}}</p>
+        <div class="item__post-info">
+          <div class="item__counter">
+            <img src="img/eye.png" alt="" class="item__counter-icon" width="26">
+           <p><strong>&#128065</strong> {{post['views_count']}}</p>
+           <p><strong>&#128512</strong> {{post['likes_count']}}</p>
+          </div>
+        </div>
+        <div class="item__post-bottom">
+          <a href="/post/{{post['pk']}}" class="item__btn-more">Подробнее</a>
+          <button type="button" class="item__bookmark-btn">
+            <img src="img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+
+{% endfor %}
+
+</main>
+</body>
+</html>

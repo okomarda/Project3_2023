@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKYPROGRAM search</title>
+  <link href="/static/css/styles.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <header class="container header">
+    <div class="header__wrapper">
+      <h2><a href="/" class="link">&#11013</a></h2>
+      <a href="#" class="header__nosvg">
+        РЕЗУЛЬТАТЫ ПОИСКА
+      </a>
+    </div>
+  </header>
+  <main class="container">
+    <div class="search">
+      <form action="/search_form/search_results" method="get">
+        <input type="text" name="s">
+        <input type="submit" value="Найти" class="button">
+      </form>
+      <p class="search__results">Найдено постов по ключевому слову "{{key_word}}":{{len_posts_searched}}</p>
+    </div>
+    {% for post in posts_searched %}
+    <section class="items">
+      <div class="items__item item">
+        <div class="item__top">
+          <a href="/users/{{post['poster_name']}}" class="item__head">
+            <div class="item__ava-wrap">
+              <img src="{{post['poster_avatar']}}" alt="" class="item__ava" width="47">
+            </div>
+
+          </a>
+        </div>
+        <a href="/post.html" class="item__post-link">
+          <img src="{{post['pic']}}" alt="" width="348" class="item__post-img">
+        </a>
+        <div class="item__post-info">
+          <div class="item__counter">
+            <img src="img/eye.png" alt="" class="item__counter-icon" width="26">
+           <p><strong>&#128065</strong> {{post['views_count']}}</p>
+           <p><strong>&#128512</strong> {{post['likes_count']}}</p>
+
+          </div>
+        </div>
+        <div class="item__post-bottom">
+          <a href="/post/{{post['pk']}}" class="item__btn-more">Подробнее</a>
+          <button type="button" class="item__bookmark-btn">
+            <img src="img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
+          </button>
+        </div>
+      </div>
+      </section>
+
+    {% endfor %}
+  </main>
+
+
+</body>
+
+</html>
